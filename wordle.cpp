@@ -9,6 +9,7 @@
 
 #include "wordle.h"
 #include "dict-eng.h"
+#include <vector> 
 using namespace std;
 
 
