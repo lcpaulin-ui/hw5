@@ -23,7 +23,7 @@ std::set<std::string> wordle(
 {
 
     std::set<std::string> temp_words;
-    wordle_helper(temp_words,"-i--", 0); 
+    wordle_helper(temp_words,in, 0); 
 
     return temp_words; 
 }
@@ -44,11 +44,8 @@ void wordle_helper(std::set<std::string>& out, std::string in, int pos){
         }
 
         // explore 
-        {
         in[pos] = 'a' + i; 
         wordle_helper(out,in, pos+1); 
-    
-        }
 
         in[pos] = '-'; // undo! 
 
