@@ -25,10 +25,15 @@ std::set<std::string> wordle(
 {
 
     std::set<std::string> temp_words;
+    std::set<std::string> final;
+    wordle_floaters(temp_words, floating, in, 0, 0);
+    for (auto word : temp_words){
+        if (dict.find(word) != dict.end()){
+            final.insert(word); 
+        }
+    }
 
-    wordle_floaters(temp_words, floating, in, 0, 0); 
-
-    return temp_words; 
+    return final; 
 }
 
 
