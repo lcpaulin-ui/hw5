@@ -24,11 +24,11 @@ std::set<std::string> wordle(
     const std::set<std::string>& dict)
 {
 
-        vector<char> floaters; 
+    std::vector<char> floaters; 
         for (auto c : floating) {
             floaters.push_back(c); 
         }
-        vector<string> partial; 
+        std::vector<string> partial; 
         wordle_floats(partial, floaters, in, 0); 
         std::set<std::string> out;
         for (int i = 0; i < floaters.size(); i++)
@@ -42,7 +42,7 @@ std::set<std::string> wordle(
 }
 
 // Define any helper functions here
-void wordle_floats(vector<string> part, vector<char> floats, std::string in, int pos){
+void wordle_floats(std::vector<string> part, std::vector<char> floats, std::string in, int pos){
 
     if (pos == in.size() ){
         part.push_back(in); 
