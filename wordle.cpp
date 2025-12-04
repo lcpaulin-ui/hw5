@@ -9,14 +9,13 @@
 
 #include "wordle.h"
 #include "dict-eng.h"
-#include <vector> 
 using namespace std;
 
 
 // Add prototypes of helper functions here
 void wordle_helper(std::set<std::string>& out, std::string in, int pos); 
-void wordle_floats(std::vector<string> part, std::vector<char> floats, std::string in, int pos); 
-void wordle_rest(std::set<std::string>& out, string in, int pos); 
+void wordle_floaters(std::set<std::string>& out, std::string floaters, std::string in, int floater_cnt,  int pos); 
+void wordle_remaining(std::set<std::string>& out, std::string in, int pos); 
 
 // Definition of primary wordle function
 std::set<std::string> wordle(
@@ -25,41 +24,62 @@ std::set<std::string> wordle(
     const std::set<std::string>& dict)
 {
 
+    std::set<std::string> temp_words;
 
+    wordle_floaters(temp_words, floating, in, 0, 0); 
 
-    
+    return temp_words; 
 }
 
-// Define any helper functions here
-void worlde_helper(std::vector<string> part, std::vector<char> floats, std::string in, int pos){
 
+// Define any helper functions here
+void wordle_floaters(std::set<std::string>& out, std::string floaters, std::string in, int floater_cnt,  int pos){
+
+    // base case: placed all floating letters 
+    if (floater_cnt == floaters.size()){
+        wordle_remaining(out, in, 0); 
+    }
+            for (int i = 0; i < in.size(); i++){
+                // explore 
+                if (in[i] == '-'){
+                    in[i] = floaters[floater_cnt];
+                    wordle_floaters(out, floaters, in, floater_cnt+1, pos+1); 
+                    in[i] = '-'; 
+                }
+    
+            }
+            // undo ! 
+
+}
+
+
+// Define any helper functions here
+void wordle_remaining(std::set<std::string>& out, std::string in, int pos){
     if (pos == in.size()){
         out.insert(in); 
         return; 
     }
 
       // choose 
-      if (in[pos] != '-'){
-        wordle_rest(out,in, pos+1); 
+    if (in[pos] != '-'){
+        wordle_remaining(out, in, pos+1); 
         // set , keep going 
     }
+    else 
+   { 
+        for (int i = 0; i <= 25; i++){
+            // explore 
+            in[pos] = 'a'+ i; 
+            wordle_remaining(out, in, pos+1); 
 
-    for (int i = 0; i <= 25; i++){
-        // explore 
-        in[pos] = 'a' + i; 
-        wordle_rest(out,in, pos+1); 
-
+        }
+        in[pos] = '-'; // undo! 
+        // undo ! 
     }
-    in[pos] = '-'; // undo! 
-    // undo ! 
-    
-} 
 
-
-// Define any helper functions here
-void wordle_rest(std::set<std::string>& out, string in, int pos){
-
-    
 }
+
+
+
 
 
