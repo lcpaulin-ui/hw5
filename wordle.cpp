@@ -38,7 +38,7 @@ void wordle_helper(std::set<std::string>& out, std::string in, int pos){
 
     for (int i = 0; i <= 25; i++){
         // choose 
-        if (in[pos] != '-'){
+        if (in[pos] == '-'){
             wordle_helper(out,in, pos+1); 
             // fixed , keep going 
         }
