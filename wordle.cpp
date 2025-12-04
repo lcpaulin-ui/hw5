@@ -14,7 +14,7 @@ using namespace std;
 
 // Add prototypes of helper functions here
 void wordle_helper(std::set<std::string>& out, std::string in, int pos); 
-void wordle_floats(vector<string> part, vector<char> floats, std::string in, int pos); 
+void wordle_floats(std:vector<string> part, std:vector<char> floats, std::string in, int pos); 
 void wordle_rest(std::set<std::string>& out, string in, int pos); 
 
 // Definition of primary wordle function
