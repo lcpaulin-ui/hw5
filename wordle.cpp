@@ -15,7 +15,7 @@ using namespace std;
 // Add prototypes of helper functions here
 void wordle_helper(std::set<std::string>& out, std::string in, int pos); 
 void wordle_floaters(std::set<std::string>& out, std::string floaters, std::string in, int floater_cnt,  int pos); 
-void wordle_remaining(std::set<std::string>& out, std::string in, int pos); 
+void wordle_remaining(std::set<std::string>& out, std::string in, int pos, const std::set<std::string>& dict); 
 
 // Definition of primary wordle function
 std::set<std::string> wordle(
@@ -25,15 +25,8 @@ std::set<std::string> wordle(
 {
 
     std::set<std::string> temp_words;
-    std::set<std::string> final;
     wordle_floaters(temp_words, floating, in, 0, 0);
-    for (auto word : temp_words){
-        if (dict.find(word) != dict.end()){
-            final.insert(word); 
-        }
-    }
-
-    return final; 
+    return temp_words; 
 }
 
 
@@ -42,7 +35,7 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
 
     // base case: placed all floating letters 
     if (floater_cnt == floaters.size()){
-        wordle_remaining(out, in, 0); 
+        wordle_remaining(out, in, 0, const std::set<std::string>& dict); 
     }
             for (int i = 0; i < in.size(); i++){
                 // explore 
@@ -59,9 +52,10 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
 
 
 // Define any helper functions here
-void wordle_remaining(std::set<std::string>& out, std::string in, int pos){
+void wordle_remaining(std::set<std::string>& out, std::string in, int pos, const std::set<std::string>& dict){
     if (pos == in.size()){
-        out.insert(in); 
+        if (dict.find(in) != dict.end())
+       { out.insert(in); }
         return; 
     }
 
