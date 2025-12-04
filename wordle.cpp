@@ -33,18 +33,27 @@ void wordle_helper(std::set<std::string>& out, std::string in, int pos){
 
     if (pos == in.size() ){
         out.insert(in); 
+        return; 
     }
 
     for (int i = 0; i <= 25; i++){
-        if (in[pos] == '-')
+        // choose 
+        if (in[pos] != '-'){
+            wordle_helper(out,in, pos+1); 
+            // fixed , keep going 
+        }
+
+        // explore 
         {
-        in[pos] = 'a' + 1; 
+        in[pos] = 'a' + i; 
         wordle_helper(out,in, pos+1); 
-        in[pos] = '-'; 
     
         }
+
+        in[pos] = '-'; // undo! 
 
     }
     // undo ! 
 
 }
+
