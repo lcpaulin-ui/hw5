@@ -46,6 +46,7 @@ std::set<std::string> wordle(
 void wordle_floats(std::vector<string> part, std::vector<char> floats, std::string in, int pos){
 
     if (pos == in.size() ){
+        std::cout << in << endl; 
         part.push_back(in); 
         return; 
     } 
@@ -70,7 +71,7 @@ void wordle_floats(std::vector<string> part, std::vector<char> floats, std::stri
 void wordle_rest(std::set<std::string>& out, string in, int pos){
 
     if (pos == in.size()){
-        std::cout << in << endl; 
+        
         out.insert(in); 
         return; 
     }
