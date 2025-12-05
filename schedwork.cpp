@@ -55,7 +55,7 @@ bool schedule(
     size_t numWorkers = avail[0].size(); 
 
     // avoid seg faults , set up matrix 
-    sched = DailySchedule(days, std::vector<Worker_T>(dailyNeed, 0)); 
+    sched = DailySchedule(days, std::vector<Worker_T>(dailyNeed, INVALID_ID)); 
 
     std::vector<int> worked(numWorkers, 0); // init to 0, add when marked as done, if reaches max cant add anymore 
     // typedef std::vector<std::vector<Worker_T> > DailySchedule;
@@ -86,11 +86,11 @@ bool sched_helper(size_t n, size_t dPos, size_t numWorkers, size_t slot, DailySc
             worked[i]++; 
             if (sched_helper(n, dPos, numWorkers, slot+1, shifts, dailyNeed, avail, worked, maxShifts)) {
                 return true; 
-            }
-            
+            } 
+
             shifts[dPos][slot] = INVALID_ID; 
-            worked[i]--;  
-        }  
+            worked[i]--; 
+        }
     }
 
     
