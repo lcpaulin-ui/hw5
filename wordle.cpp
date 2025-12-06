@@ -43,12 +43,12 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
         if (in[i] == '-'); 
         nDashes++;
     }
-
+    // try toi prune as much aas possible so that ctests time doesnt time out 
     if (nDashes < floaters.size() - floater_cnt){
         return; 
     }
 
-    // # 1 
+    // # 1  loop , max have 5 
             for (int i = 0; i < in.size(); i++){
                 // explore 
                 if (in[i] == '-'){
@@ -65,28 +65,30 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
 
 // Define any helper functions here
 void wordle_remaining(std::set<std::string>& out, std::string in, int pos, const std::set<std::string>& dict){
-    if (pos == in.size()){
+    if (pos == in.size()){ // if oob from word 
     
-        if (dict.find(in) != dict.end())
+        if (dict.find(in) != dict.end()) // if in dictionary push it back iuntod my results vector 
       { out.insert(in); }
         return; 
     }
 
       // choose 
-    if (in[pos] != '-'){
+    if (in[pos] != '-'){ // keep going, not a place available ton insert letters , 
         wordle_remaining(out, in, pos+1, dict); 
         // set , keep going 
     }
     else 
    { 
-    // 2 
+    // 2  loop, max of 5 . 
+    // iterate thru alphabet, if time before i submit will try to prune this before 
+    // how can i prune 
         for (int i = 0; i <= 25; i++){
             // explore 
             in[pos] = 'a'+ i; 
             wordle_remaining(out, in, pos+1, dict); 
 
         }
-        in[pos] = '-'; // undo! 
+        in[pos] = '-'; // undo!  // to make another choice 
         // undo ! 
     }
 
