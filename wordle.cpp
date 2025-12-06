@@ -36,6 +36,7 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
     // base case: placed all floating letters 
     if (floater_cnt == floaters.size()){
         wordle_remaining(out, in, 0, dict); 
+        return; 
     }
 
     // # 1 
