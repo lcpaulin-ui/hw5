@@ -23,7 +23,6 @@ std::set<std::string> wordle(
     const std::string& floating,
     const std::set<std::string>& dict)
 {
-
     std::set<std::string> temp_words;
     wordle_floaters(temp_words, floating, in, 0, 0, dict);
     return temp_words; 
@@ -36,6 +35,16 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
     // base case: placed all floating letters 
     if (floater_cnt == floaters.size()){
         wordle_remaining(out, in, 0, dict); 
+        return; 
+    }
+    int nDashes = 0; 
+    // if more letters than dashes 
+    for (int i = 0; i < in.size(); i++){
+        if (in[i] == '-'); 
+        nDashes++;
+    }
+
+    if (nDashes < floaters.size() - floater_cnt){
         return; 
     }
 
