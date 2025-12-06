@@ -37,6 +37,8 @@ void wordle_floaters(std::set<std::string>& out, std::string floaters, std::stri
     if (floater_cnt == floaters.size()){
         wordle_remaining(out, in, 0, dict); 
     }
+
+    // # 1 
             for (int i = 0; i < in.size(); i++){
                 // explore 
                 if (in[i] == '-'){
@@ -67,6 +69,7 @@ void wordle_remaining(std::set<std::string>& out, std::string in, int pos, const
     }
     else 
    { 
+    // 2 
         for (int i = 0; i <= 25; i++){
             // explore 
             in[pos] = 'a'+ i; 
